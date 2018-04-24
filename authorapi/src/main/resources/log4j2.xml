@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration xmlns:xi="http://www.w3.org/2001/XInclude"
+    status="WARN">
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout
+                pattern="%d [%t] %-5level %logger{36} - %msg%n%throwable" />
+        </Console>
+        <Console name="ConsoleJSONAppender" target="SYSTEM_OUT">
+            <JsonLayout complete="false" compact="false">
+                <KeyValuePair key="myCustomField" value="myCustomValue" />
+            </JsonLayout>
+        </Console>
+        <File name="JSONLogfileAppender" fileName="target/logfile.json">
+            <JSONLayout compact="true" eventEol="true" />
+            <BurstFilter level="INFO" rate="2" maxBurst="10" />
+        </File>
+        <Async name="AsyncAppender" bufferSize="80">
+            <AppenderRef ref="JSONLogfileAppender" />
+        </Async>
+    </Appenders>
+    <Loggers>
+        <Logger name="ASYNC_JSON_FILE_APPENDER" level="INFO"
+            additivity="false">
+            <AppenderRef ref="AsyncAppender" />
+        </Logger>
+        <Logger name="CONSOLE_JSON_APPENDER" level="TRACE"
+            additivity="false">
+            <AppenderRef ref="ConsoleJSONAppender" />
+        </Logger>
+        <Root level="DEBUG">
+            <AppenderRef ref="ConsoleAppender" />
+        </Root>
+    </Loggers>
+</Configuration>
