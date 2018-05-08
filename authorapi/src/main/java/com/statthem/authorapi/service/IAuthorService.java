@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.statthem.authorapi.dto.AuthorDto;
 import com.statthem.authorapi.model.Author;
 
 @Service
@@ -20,6 +21,9 @@ public interface IAuthorService {
 	
 	public boolean updateAuthor(Author updatedAuthor);
 	
-	public boolean deleteAuthor(Author author);
+	public boolean deleteAuthor(BigInteger id);
+	
+	
+	public AuthorDto convertToDto(Author author);
 
 }

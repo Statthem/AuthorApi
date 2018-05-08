@@ -1,5 +1,7 @@
 package com.statthem.authorapi.configuration;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -31,6 +33,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
           .antMatchers("/")
           .authenticated()
           .and()
-          .httpBasic();
+          .httpBasic()
+          .and()
+          .csrf().disable();
+    }
+    
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 }

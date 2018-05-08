@@ -30,19 +30,19 @@ public class Author implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable = false, unique = true)
-	BigInteger id;
+	private	BigInteger id;
 
 	@Column
-	String firstName;
+    private	String firstName;
 
 	@Column
-	String secondName;
+	private String secondName;
 
 	@Column
-	String shortBiography;
+	private String shortBiography;
 
 	@Column
-	Date birhDay;
+	private Date birhDay;
 
 	public Author() {
 

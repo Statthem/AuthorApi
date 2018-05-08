@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -19,12 +20,14 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.statthem.authorapi.configuration.DataSourceConfiguration;
+import com.statthem.authorapi.configuration.TestDataSourceConfiguration;
 import com.statthem.authorapi.model.Author;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = { DataSourceConfiguration.class },
+@ContextConfiguration(classes = { TestDataSourceConfiguration.class },
                       loader = AnnotationConfigContextLoader.class)
 @Transactional
+@ActiveProfiles("test")
 public class AuthorInMemoryDbTest {
 
 	@Resource

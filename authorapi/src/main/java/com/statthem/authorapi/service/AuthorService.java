@@ -4,11 +4,13 @@ import java.math.BigInteger;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.statthem.authorapi.dao.AuthorDAO;
+import com.statthem.authorapi.dto.AuthorDto;
 import com.statthem.authorapi.model.Author;
 
 
@@ -17,6 +19,9 @@ public class AuthorService implements IAuthorService {
 	
 	@Autowired
 	AuthorDAO authorDAO;
+	
+	@Autowired
+	ModelMapper modelMapper;
 
 	@Override
 	public Author getAuthorByID(BigInteger id) {
@@ -76,16 +81,22 @@ public class AuthorService implements IAuthorService {
 	}
 
 	@Override
-	public boolean deleteAuthor(Author author) {
+	public boolean deleteAuthor(BigInteger id) {
 		boolean flag = true;
 		
 		try {
-		authorDAO.delete(author);
+		authorDAO.delete(id);
 		}catch(Exception exc) {
 			flag = false;
 		}
 
 		return flag;
+	}
+	
+	public AuthorDto convertToDto(Author author) {
+		AuthorDto authorDto = modelMapper.map(author, AuthorDto.class);
+	    
+	    return authorDto;
 	}
 
 	
